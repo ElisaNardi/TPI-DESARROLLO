@@ -1,0 +1,137 @@
+/* Contenedor principal que ocupa toda la pantalla y posiciona los elementos */
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Alinea el formulario a la derecha */
+  height: 100vh;
+  background-color: #fdfaf6; /* Mismo fondo que el home */
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden; /* Evita que el círculo gigante cree scrollbars */
+  position: relative; /* Necesario para posicionar el círculo */
+  padding-right: 15%; /* Empuja el formulario un poco desde el borde derecho */
+}
+
+/* El círculo decorativo gigante de la izquierda */
+.login-container::before {
+  content: ''; /* Pseudo-elementos siempre necesitan 'content' */
+  position: absolute;  /* Lo sacamos del flujo normal para posicionarlo libremente */
+  top: 50%; /* Lo posicionamos para que se salga por arriba */
+  left: 0; /* Y por la izquierda */
+  width: 150vh; /* Tamaño del círculo */
+  height: 150vh;
+  transform: translate(-35%, -50%); /* Lo movemos 65% de su propio ancho a la izquierda y 50% de su alto hacia arriba */
+  background-color: #d1b3e6; /* Color lila del círculo */
+  border-radius: 50%; /* Lo hace un círculo perfecto */
+  z-index: 0; /* Lo pone detrás del formulario */
+}
+
+/* El contenedor del formulario */
+.login-form-wrapper {
+  background-color: white;
+  padding: 3rem 4rem; /* Espaciado interno generoso */
+  border-radius: 40px; /* Bordes muy redondeados */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  width: 100%;
+  max-width: 450px; /* Ancho máximo para el formulario */
+  z-index: 1; /* Asegura que esté por encima del círculo */
+}
+
+/* Título "Bienvenido" */
+.login-form-wrapper h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #C1A7E2; /* Color lila */
+  margin-bottom: 2.5rem;
+}
+
+/* Contenedor para cada grupo de label + input */
+.form-group {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+/* Estilo para los campos de texto (inputs) */
+.form-group input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid #8660a9; /* Borde morado oscuro */
+  border-radius: 50px; /* Bordes de píldora */
+  font-size: 1rem;
+  background-color: #f8f8f8;
+  transition: all 0.3s ease;
+  box-sizing: border-box; /* Importante para que el padding no afecte el ancho */
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #C1A7E2; /* Cambia el color del borde al hacer foco */
+  box-shadow: 0 0 0 3px rgba(193, 167, 226, 0.4); /* Añade un resplandor */
+}
+
+/* Contenedor para los botones */
+.button-group {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column; /* Apila los botones verticalmente */
+  gap: 1rem; /* Espacio entre los botones */
+}
+
+/* Estilo común para ambos botones */
+.button-group button {
+  width: 100%;
+  padding: 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+.error-message {
+  color: #dc3545; /* Color rojo de error */
+  font-size: 0.8rem;
+  padding-left: 1rem;
+  margin-top: 0.25rem;
+}
+.forgot-password {
+    margin-top: 1.5rem;
+}
+.forgot-password a {
+    color: #8A2BE2;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+/* Estilo específico para el botón "Ingresar" */
+.primary-button {
+  background-color: #C1A7E2;
+  color: white;
+  border: 2px solid #502D73;
+}
+
+.primary-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilo específico para el botón "Registrarse" */
+.secondary-button {
+  background-color: #E8DAF5; /* Un lila más claro */
+  color: #502D73; /* Texto morado oscuro */
+  border: 2px solid #502D73;
+}
+
+.secondary-button:hover {
+  background-color: #d1b3e6;
+  transform: translateY(-3px);
+}

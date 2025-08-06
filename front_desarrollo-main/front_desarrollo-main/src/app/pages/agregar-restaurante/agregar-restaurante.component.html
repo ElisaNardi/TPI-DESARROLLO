@@ -1,0 +1,82 @@
+<!-- Contenedor principal que centra y da estilo a la página. -->
+<div class="page-container">
+  
+  <!-- "Tarjeta" visual que envuelve el formulario. -->
+  <div class="form-wrapper">
+
+    <!-- La etiqueta <form> conecta el HTML con el FormGroup del .ts. -->
+    <form [formGroup]="addRestaurantForm" (ngSubmit)="onSubmit()" class="restaurant-form" novalidate>
+      
+      <!-- Columna Izquierda -->
+      <div class="form-column">
+        
+        <!-- Campo: Nombre (con sus mensajes de error) -->
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" formControlName="nombre">
+          @if (addRestaurantForm.get('nombre')?.invalid && addRestaurantForm.get('nombre')?.touched) {
+            <div class="error-message">
+              @if (addRestaurantForm.get('nombre')?.hasError('required')) { <span>El nombre es requerido.</span> }
+              @if (addRestaurantForm.get('nombre')?.hasError('minlength')) { <span>El nombre debe tener al menos 3 caracteres.</span> }
+            </div>
+          }
+        </div>
+        
+        <!-- Grupo de Dirección: agrupa los campos de dirección bajo el formGroupName 'address'. -->
+        <div formGroupName="address">
+          <!-- Campo: Ciudad -->
+          <div class="form-group">
+            <label for="ciudad">Ciudad</label>
+            <input type="text" id="ciudad" formControlName="ciudad">
+            @if (addRestaurantForm.get('address.ciudad')?.invalid && addRestaurantForm.get('address.ciudad')?.touched) {
+              <div class="error-message"><span>La ciudad es requerida.</span></div>
+            }
+          </div>
+          <!-- Campo: Calle -->
+          <div class="form-group">
+            <label for="calle">Calle</label>
+            <input type="text" id="calle" formControlName="calle">
+            @if (addRestaurantForm.get('address.calle')?.invalid && addRestaurantForm.get('address.calle')?.touched) {
+              <div class="error-message"><span>La calle es requerida.</span></div>
+            }
+          </div>
+          <!-- Campo: Número -->
+          <div class="form-group">
+            <label for="numero">Número</label>
+            <input type="text" id="numero" formControlName="numero">
+            @if (addRestaurantForm.get('address.numero')?.invalid && addRestaurantForm.get('address.numero')?.touched) {
+              <div class="error-message"><span>El número es requerido.</span></div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Derecha -->
+      <div class="form-column">
+        <!-- Campo: Descripción -->
+        <div class="form-group">
+          <label for="descripcion">Descripción del restaurante</label>
+          <textarea id="descripcion" formControlName="descripcion" rows="5"></textarea>
+        </div>
+        <!-- Campo: Imagen URL (con sus mensajes de error) -->
+        <div class="form-group">
+          <label for="imagenUrl">Agregar multimedia (URL)</label>
+          <input type="text" id="imagenUrl" formControlName="imagenUrl">
+          @if (addRestaurantForm.get('imagenUrl')?.invalid && addRestaurantForm.get('imagenUrl')?.touched) {
+            <div class="error-message">
+              @if (addRestaurantForm.get('imagenUrl')?.hasError('required')) { <span>La URL de la imagen es requerida.</span> }
+              @if (addRestaurantForm.get('imagenUrl')?.hasError('pattern')) { <span>Por favor, ingrese una URL válida.</span> }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Botón de Envío: se deshabilita si el formulario no es válido. -->
+      <div class="form-actions">
+        <button type="submit" class="submit-button" [disabled]="addRestaurantForm.invalid">
+          Añadir
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

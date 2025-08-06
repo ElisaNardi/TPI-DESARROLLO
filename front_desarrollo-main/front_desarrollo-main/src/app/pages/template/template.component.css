@@ -1,0 +1,29 @@
+/* template.component.css */
+
+/* para estilos al navbar, al fondo, al modal, etc. */
+.bg-purple {
+  /* He usado un color más cercano al de tus diseños */
+  background-color: #C1A7E2 !important; 
+}
+
+/* para menu lateral */
+.ms-240 {
+  margin-left: 240px;
+}
+
+.transition-all {
+  transition: margin-left 0.3s ease;
+}
+
+/* --- NUEVO ESTILO PARA EL TÍTULO --- */
+.navbar-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem; /* Tamaño del título */
+  color: white;
+}
+
+/* --- ESTILO PARA LOS ÍCONOS (OPCIONAL, pero recomendado) --- */
+.navbar .btn .bi {
+  vertical-align: middle; /* Alinea mejor los íconos */
+}

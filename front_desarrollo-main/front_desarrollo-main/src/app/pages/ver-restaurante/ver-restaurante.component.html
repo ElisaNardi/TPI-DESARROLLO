@@ -1,0 +1,83 @@
+<!-- src/app/pages/ver-restaurante/ver-restaurante.component.html -->
+<!-- 
+  El contenedor principal solo se muestra si tenemos el nombre del restaurante,
+  lo que indica que la primera llamada a la API fue exitosa.
+-->
+@if (restaurantName) {
+
+  <div class="page-container">
+    <div class="menu-content">
+
+      <!-- 
+                       BUCLE @for CON BLOQUE CONDICIONAL @empty    
+        @for se ejecutará si el array 'menuCategories' tiene uno o más elementos.
+        @empty se ejecutará si el array 'menuCategories' está vacío.
+        Esto nos permite mostrar una interfaz para cuando SÍ HAY menú y otra para cuando NO HAY.
+      -->
+      @for (category of menuCategories; track category.name) {
+        
+        <!-- ESTO SE MUESTRA SI HAY MENÚ -->
+        <h2 class="category-title">{{ category.name }}</h2>
+        <div class="products-container">
+          @for (product of category.products; track product.id) {
+            <div class="product-card">
+              <div class="product-info">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+              </div>
+              <div class="product-price">
+                <span>{{ product.price | currency:'ARS':'$' }}</span>
+              </div>
+              <button class="add-to-cart-button">Añadir al carrito</button>
+            </div>
+          }
+        </div>
+
+      } @empty {
+
+        <!-- ESTO SE MUESTRA SI NO HAY MENÚ -->
+        <div class="empty-menu-container">
+          <!-- 
+            Usamos @if anidado para personalizar el mensaje según el rol del usuario.
+          -->
+          @if (authService.isAdmin()) {
+            <!-- Mensaje y botón para el Administrador -->
+            <p>Este restaurante aún no tiene un menú.</p>
+            <p>¡Añade uno para empezar a vender!</p>
+              <button (click)="goToManageMenu()">+ Añadir menú</button>
+          } @else {
+            <!-- Mensaje para el usuario común -->
+            <p>Este restaurante no tiene un menú disponible en este momento.</p>
+          }
+        </div>
+
+      }
+
+    </div>
+
+    <!-- 
+
+           BOTONES DE ACCIÓN EN EL FOOTER    
+    -->
+    <div class="footer-actions">
+
+      <!-- 
+        El botón "Editar Menú" solo aparece si se cumplen DOS condiciones:
+        1. El usuario es admin (authService.isAdmin()).
+        2. YA EXISTE un menú (menuCategories.length > 0).
+      -->
+      @if (authService.isAdmin() && menuCategories.length > 0) {
+        <button class="edit-menu-button" (click)="goToManageMenu()">Editar Menú</button>
+      }
+
+      <!-- 
+        El botón "Terminar compra" solo aparece si se cumplen DOS condiciones:
+        1. El usuario NO es admin (!authService.isAdmin()).
+        2. YA EXISTE un menú (menuCategories.length > 0).
+      -->
+      @if (!authService.isAdmin() && menuCategories.length > 0) {
+        <button class="finish-purchase-button">Terminar compra</button>
+      }
+    </div>
+  </div>
+}

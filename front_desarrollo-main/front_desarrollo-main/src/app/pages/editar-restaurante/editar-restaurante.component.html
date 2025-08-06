@@ -1,0 +1,65 @@
+<!-- Contenedor principal que centra el formulario en la página. -->
+<div class="page-container">
+  
+  <!-- Usamos @if para mostrar un mensaje de carga mientras se obtienen los datos. -->
+  @if (isLoading) {
+    <p>Cargando datos del restaurante...</p>
+  } @else {
+
+    <!-- El formulario se vincula a 'restaurantForm' y llama a 'onSubmit' al enviar. -->
+    <form [formGroup]="restaurantForm" (ngSubmit)="onSubmit()" class="form-container">
+      
+      <!-- Título del formulario -->
+      <h2>Editar restaurante</h2>
+
+      <!-- Contenedor de la grilla que organiza los campos en dos columnas. -->
+      <div class="form-grid">
+        
+        <!-- Campo: Nombre -->
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" formControlName="name">
+        </div>
+        
+        <!-- Campo: Descripción -->
+        <div class="form-group">
+          <label for="description">Descripción del restaurante</label>
+          <input type="text" id="description" formControlName="description">
+        </div>
+
+        <!-- Campo: Ciudad -->
+        <div class="form-group">
+          <label for="city">Ciudad</label>
+          <input type="text" id="city" formControlName="city">
+        </div>
+        
+        <!-- Campo: Imagen -->
+        <div class="form-group">
+          <label for="imageUrl">Imagen</label>
+          <input type="text" id="imageUrl" formControlName="imageUrl" placeholder="https://ejemplo.com/imagen.jpg">
+        </div>
+
+        <!-- Campo: Calle -->
+        <div class="form-group">
+          <label for="street">Calle</label>
+          <input type="text" id="street" formControlName="street">
+        </div>
+        
+        <!-- Campo: Número -->
+        <div class="form-group">
+          <label for="number">Numero</label>
+          <input type="text" id="number" formControlName="number">
+        </div>
+
+      </div>
+
+      <!-- Contenedor para el botón de acción al final del formulario. -->
+      <div class="footer-actions">
+        <!-- El botón está deshabilitado si el formulario no es válido. -->
+        <button type="submit" class="save-button" [disabled]="restaurantForm.invalid">Guardar cambios</button>
+      </div>
+
+    </form>
+  }
+  
+</div>

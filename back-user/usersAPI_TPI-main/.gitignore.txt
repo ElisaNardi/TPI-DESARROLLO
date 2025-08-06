@@ -1,0 +1,20 @@
+# Node modules
+node_modules/
+
+# Compiled files
+dist/
+
+# Env files
+.env
+
+# Logs
+logs
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,157 @@
+/* src/app/pages/restaurantes/restaurantes.component.css */
+
+/* --- ESTILOS GENERALES DE LA PÁGINA --- */
+
+.page-container {
+  padding: 2rem;
+  background-color: #fdfaf6; /* Un fondo cálido y acogedor. */
+  min-height: calc(100vh - 60px); /* Asegura que la página ocupe al menos toda la pantalla. */
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #502D73;
+}
+
+
+/* --- DISEÑO DEL CONTENEDOR DE TARJETAS (FLEXBOX) --- */
+
+.restaurants-container {
+  display: flex;       /* Activa Flexbox para alinear los elementos hijos. */
+  flex-wrap: wrap;     /* Permite que las tarjetas se muevan a la siguiente línea si no hay espacio. */
+  justify-content: center; /* Centra las tarjetas en el contenedor. */
+  gap: 2rem;           /* Define el espacio entre cada tarjeta. */
+}
+
+
+/* --- ESTILO DE CADA TARJETA DE RESTAURANTE --- */
+
+.restaurant-card {
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 350px;
+  display: flex;         /* Usa Flexbox para el contenido INTERNO de la tarjeta. */
+  flex-direction: column;/* Apila los elementos (título, imagen, botones) verticalmente. */
+  align-items: center;   /* Centra todo el contenido de la tarjeta horizontalmente. */
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-10px); /* Efecto sutil de "levitar" al pasar el cursor. */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+
+/* --- ESTILO DEL CONTENIDO DENTRO DE LA TARJETA --- */
+
+.restaurant-card h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.restaurant-card .address {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 1rem;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 180px;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  overflow: hidden; /* Asegura que la imagen respete los bordes redondeados. */
+}
+
+.image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Escala la imagen para llenar el contenedor sin deformarse. */
+}
+
+.restaurant-card .description {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  flex-grow: 1; /* Permite que este elemento crezca para llenar el espacio vertical disponible. */
+}
+
+
+/* --- ESTILO DE LOS BOTONES --- */
+
+/* Botón "Ingresar" */
+.ingresar-button {
+  width: 80%;
+  padding: 0.8rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 2px solid #502D73;
+  background-color: #C1A7E2;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+/* 
+  ==============================================================
+  ===           ESTILOS PARA ADMIN            ===
+  ==============================================================
+*/
+
+/* Contenedor que agrupa TODOS los botones de admin */
+.admin-buttons-container {
+  width: 80%; /* Ocupa el mismo ancho que "Ingresar" para alineación vertical. */
+  display: flex;
+  flex-direction: column; /* Apila los botones uno encima del otro. */
+  gap: 10px; /* Espacio vertical entre los botones. */
+  margin-top: 10px; /* Espacio superior para separarlo del botón "Ingresar". */
+}
+
+/* 
+  Estilo base COMPARTIDO por TODOS los botones de admin.
+  Esto asegura que "Editar", "Gestionar menú" y "Eliminar" se vean consistentes.
+*/
+.edit-button,
+.manage-menu-button, /* Añadimos la nueva clase aquí */
+.delete-button {
+  width: 100%;
+  padding: 0.7rem 0;
+  font-size: 1rem; /* Ligeramente más pequeño que "Ingresar" para dar jerarquía. */
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 2px solid #502D73;
+  background-color: #C1A7E2;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+/* 
+  Efecto Hover para TODOS los botones de admin.
+  Al pasar el ratón, invertimos los colores para un feedback claro.
+*/
+.edit-button:hover,
+.manage-menu-button:hover,
+.delete-button:hover {
+  border: 2px solid #502D73;
+  background-color: #C1A7E2;
+  color: white;
+}

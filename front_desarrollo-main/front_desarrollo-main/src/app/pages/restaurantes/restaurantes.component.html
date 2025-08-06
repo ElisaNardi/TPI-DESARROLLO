@@ -1,0 +1,54 @@
+<!-- src/app/pages/restaurantes/restaurantes.component.html -->
+
+<div class="page-container">
+  <div class="restaurants-container">
+
+    <!-- 
+      El bucle @for renderiza una tarjeta por cada restaurante en la lista.
+      Todo lo que está dentro se repite dinámicamente.
+    -->
+    @for (restaurant of restaurants; track restaurant.id) {
+      <div class="restaurant-card">
+        
+        <!-- Contenido de la tarjeta (nombre, dirección, imagen, etc.) -->
+        <h3>{{ restaurant.name }}</h3>
+        <p class="address">{{ restaurant.address.street }}, {{ restaurant.address.number }}</p>
+        <div class="image-placeholder">
+          <img [src]="restaurant.fullImageUrl" alt="Imagen de {{ restaurant.name }}">
+        </div>
+        <p class="description">{{ restaurant.description }}</p>
+        
+        <!-- Botón "Ingresar": Visible para todos los usuarios. -->
+        <button class="ingresar-button" (click)="verRestaurante(restaurant.id)">
+          Ingresar
+        </button>
+
+        <!-- 
+          Bloque condicional @if: Este contenedor y todo su contenido
+          solo se mostrarán si el usuario logueado es un administrador.
+        -->
+        @if (authService.isAdmin()) {
+          <div class="admin-buttons-container">
+            
+            <!-- Botón para editar la información del restaurante (nombre, etc.) -->
+            <button class="edit-button" (click)="editarRestaurante(restaurant.id)">Editar</button>
+            
+            <!--
+              Este botón llama al nuevo método 'gestionarMenu' en el archivo .ts,
+              pasándole el ID del restaurante actual en el bucle.
+            -->
+            <button class="manage-menu-button" (click)="gestionarMenu(restaurant.id)">
+              Gestionar menú
+            </button>
+            
+            <!-- Botón para eliminar el restaurante completo -->
+            <button class="delete-button" (click)="eliminarRestaurante(restaurant.id)">Eliminar</button>
+
+          </div>
+        }
+
+      </div> <!-- Fin de .restaurant-card -->
+    } <!-- Fin del @for -->
+
+  </div> <!-- Fin de .restaurants-container -->
+</div> <!-- Fin de .page-container -->

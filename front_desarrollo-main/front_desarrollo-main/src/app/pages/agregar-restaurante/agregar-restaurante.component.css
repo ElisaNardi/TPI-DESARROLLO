@@ -1,0 +1,115 @@
+/* --- agregar-restaurante.component.css --- */
+
+/* Contenedor principal que centra el formulario en la página */
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinea el formulario arriba */
+  padding: 3rem 2rem;
+  background-color: #fdfaf6;
+  min-height: calc(100vh - 60px); /* Altura de la pantalla menos la navbar */
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Envoltura blanca del formulario */
+.form-wrapper {
+  background-color: white;
+  padding: 2.5rem 3rem;
+  border-radius: 40px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 900px; /* Ancho máximo para el formulario de dos columnas */
+}
+
+/* Título "Añadir restaurante" */
+.form-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #C1A7E2;
+  margin-bottom: 2.5rem;
+}
+
+/* El formulario usará Flexbox para crear las dos columnas */
+.restaurant-form {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las columnas se reorganicen en pantallas pequeñas */
+  gap: 2rem 4rem; /* 2rem de espacio vertical, 4rem de espacio horizontal */
+}
+
+/* Estilo para cada columna del formulario */
+.form-column {
+  flex: 1; /* Hace que cada columna ocupe el espacio disponible */
+  min-width: 300px; /* Ancho mínimo antes de que se apilen */
+}
+
+/* Contenedor para cada par de etiqueta y campo */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
+}
+
+/* Estilo para los campos de texto y áreas de texto */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid #8660a9;
+  border-radius: 50px;
+  font-size: 1rem;
+  background-color: #f8f8f8;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif; /* Asegura que la fuente sea la misma */
+}
+
+/* El textarea necesita un radio de borde diferente para que no se vea como una píldora */
+.form-group textarea {
+  border-radius: 25px;
+  resize: vertical; /* Permite al usuario cambiar la altura, pero no el ancho */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #C1A7E2;
+  box-shadow: 0 0 0 3px rgba(193, 167, 226, 0.4);
+}
+
+/* Contenedor para el botón de envío */
+.form-actions {
+  width: 100%; /* Ocupa todo el ancho del contenedor del formulario */
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+/* Botón "Añadir" */
+.submit-button {
+  background-color: #C1A7E2;
+  color: white;
+  border: 2px solid #502D73;
+  border-radius: 50px;
+  padding: 1rem 4rem; /* Más padding horizontal para un botón más ancho */
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-button:disabled {
+  background-color: #e0e0e0;
+  border-color: #c0c0c0;
+  cursor: not-allowed;
+}
+
+.submit-button:not(:disabled):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}

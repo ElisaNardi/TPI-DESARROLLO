@@ -1,0 +1,148 @@
+/* --- ver-restaurante.component.css --- */
+
+/* Contenedor principal de la página, define el padding y el fondo */
+.page-container {
+  padding: 2rem 5%;
+  background-color: #fdfaf6;
+  font-family: 'Poppins', sans-serif;
+  min-height: calc(100vh - 60px); /* Asegura que ocupe al menos la altura de la pantalla menos la navbar */
+}
+
+/* Título de cada categoría del menú (la píldora de color lila) */
+.category-title {
+  background-color: #E8DAF5;
+  color: #502D73;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  display: inline-block; /* Evita que ocupe todo el ancho */
+  margin-bottom: 1.5rem;
+}
+
+/* Contenedor que agrupa las tarjetas de productos */
+.products-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las tarjetas se reorganicen en varias líneas */
+  gap: 2rem; /* Espacio entre las tarjetas */
+  margin-bottom: 3rem; /* Espacio entre una categoría y la siguiente */
+}
+
+/* Estilo de la tarjeta para un producto individual */
+.product-card {
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+  padding: 1.5rem;
+  /* El cálculo de flex asegura que quepan dos tarjetas por fila */
+  flex: 1 1 calc(50% - 1rem); 
+  min-width: 320px; /* Ancho mínimo antes de que pasen a la siguiente fila */
+  display: flex;
+  align-items: center; /* Alinea verticalmente el texto, precio y botón */
+  justify-content: space-between; /* Empuja los elementos a los extremos */
+  gap: 1rem; /* Espacio entre los elementos internos de la tarjeta */
+}
+
+/* Contenedor para el nombre y la descripción */
+.product-info {
+  text-align: left;
+}
+
+.product-info h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 0.3rem 0;
+}
+
+.product-info p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Etiqueta del precio */
+.product-price span {
+  background-color: #C1A7E2;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  white-space: nowrap; /* Evita que el precio se parta en dos líneas */
+}
+
+/* Botón "Añadir al carrito" */
+.add-to-cart-button {
+  background-color: #f0eaf5;
+  color: #8A2BE2;
+  border: none;
+  border-radius: 50px;
+  padding: 0.8rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.add-to-cart-button:hover {
+  background-color: #d1b3e6;
+  color: white;
+}
+
+/* Contenedor para el botón final de la página */
+.footer-actions {
+  text-align: center;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* Botón "Terminar compra" */
+.finish-purchase-button {
+  background-color: #C1A7E2;
+  color: white;
+  border: 2px solid #502D73;
+  border-radius: 50px;
+  padding: 1rem 3rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.finish-purchase-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+  .product-card {
+    /* En móvil, cada tarjeta ocupa una fila completa para mejor legibilidad */
+    flex: 1 1 100%;
+  }
+
+}
+/*
+BOTÓN "EDITAR MENÚ"        
+*/
+.footer-actions .edit-menu-button {
+  background-color: #C1A7E2; /* Este es el color lila suave de tus otros botones */
+  color: white;/* Texto en color blanco */
+  border: 2px solid #a389c3; /* Un borde ligeramente más oscuro para dar profundidad */
+  padding: 0.8rem 2.5rem; /* Relleno interior para hacerlo más grande */
+  border-radius: 50px; /* Esquinas súper redondeadas para la forma de píldora */
+  font-size: 1.1rem; /* Tamaño de la letra */
+  font-weight: 600;/* Letra en seminegrita */
+  cursor: pointer;  /* Cursor de manito al pasar por encima */
+  transition: all 0.2s ease-in-out; /* Animación suave para los cambios */
+}
+
+/* --- Efecto Hover (cuando el ratón está encima) --- */
+.footer-actions .edit-menu-button:hover {
+  background-color: #a389c3;   /* Hacemos el fondo un poco más oscuro */
+  transform: translateY(-3px); /* Lo movemos un poquito hacia arriba para un efecto 3D sutil */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Le añadimos una sombra para que parezca que se "levanta" de la página */
+}
+
+
