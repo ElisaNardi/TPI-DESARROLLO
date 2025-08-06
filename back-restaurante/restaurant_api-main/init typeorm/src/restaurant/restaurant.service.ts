@@ -1,6 +1,4 @@
-// En: src/restaurant/restaurant.service.ts
-
-import { Injectable, NotFoundException } from '@nestjs/common'; //  para manejar errores
+import { Injectable, NotFoundException, BadRequestException  } from '@nestjs/common'; //  para manejar errores
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Menu } from '../entities/menu/menu.entity';
@@ -20,34 +18,49 @@ export class RestaurantService {
     private cityRepository: Repository<City>,
   ) {}
 
-  async create(data: any) {
-    if (!data.address || !data.address.cityName) {
-      throw new Error('Falta el campo address o cityName');
+  /**
+   * Crea un nuevo restaurante. Todos los campos que vienen del frontend.
+   * @param data Los datos enviados desde el formulario de Angular.
+   */
+  async create(data: any): Promise<Restaurant> {
+    // 1. Validación de entrada: Nos aseguramos de que los datos mínimos existan.
+    if (!data.name || !data.address || !data.address.cityName) {
+      throw new BadRequestException('Faltan campos requeridos: nombre o dirección completa.');
     }
-    const cityName = data.address.cityName;
 
+    // 2. Lógica de la Ciudad: Buscamos si la ciudad ya existe.
+    const cityName = data.address.cityName;
     let city = await this.cityRepository.findOne({ where: { name: cityName } });
 
+    // Si no existe, la creamos y guardamos.
     if (!city) {
       city = this.cityRepository.create({ name: cityName });
       await this.cityRepository.save(city);
     }
 
-    const newItem = this.restaurantRepository.create({
+    // 3. Creamos la nueva entidad 'Restaurant'
+    //    asegurándonos de mapear TODOS los campos que existen en la entidad.
+    const newRestaurant = this.restaurantRepository.create({
       name: data.name,
+      description: data.description, 
+      imageUrl: data.imageUrl,
+      // Construimos el objeto 'address' anidado tal como lo define la entidad.
       address: {
         street: data.address.street,
         number: data.address.number,
+        // Inicializamos 'location' con valores por defecto o nulos si es necesario.
+        // TypeORM espera que este objeto exista.
         location: {
-          lat: data.address.location.lat,
-          lng: data.address.location.lng,
+          lat: 0, // Puedes poner 0 como valor por defecto
+          lng: 0  // O null si la entidad lo permite
         }
       },
-      imageUrl: data.imageUrl,
+      // Asignamos la relación con la entidad 'City' que encontramos o creamos.
       city: city,
     });
 
-    return this.restaurantRepository.save(newItem);
+    // 4. Guardamos la entidad completa en la base de datos.
+    return this.restaurantRepository.save(newRestaurant);
   }
 
  

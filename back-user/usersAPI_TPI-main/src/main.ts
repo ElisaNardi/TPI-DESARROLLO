@@ -1,6 +1,6 @@
-// back-user/src/main.ts
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,6 +16,12 @@ async function bootstrap() {
     credentials: true,
   });
 
+/**
+   * 'app.useGlobalPipes' le dice a NestJS que aplique una "tubería" de validación a TODAS las peticiones entrantes.
+   * 'new ValidationPipe()' usará 'class-validator' para comprobar automáticamente
+   * si el 'body' de una petición coincide con el DTO definido en el controlador.
+   */
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(4001); 
 }
 bootstrap();

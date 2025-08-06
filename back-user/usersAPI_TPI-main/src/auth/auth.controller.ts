@@ -1,26 +1,25 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { RegisterDTO } from '../interfaces/register.dto';
+import { RegisterUserDto } from './dto/register-user.dto'; 
 import { LoginDTO } from '../interfaces/login.dto';
-import { Public } from '../middlewares/decorators/public.decorator'; // ✅ Importamos el decorador @Public
+import { Public } from '../middlewares/decorators/public.decorator';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Public() // ✅ Ruta pública: no requiere token para registrar usuario
+  @Public()
   @Post('register')
-  async register(@Body() dto: RegisterDTO) {
-    return this.authService.register(dto);
+  async register(@Body() registerUserDto: RegisterUserDto) {
+    return this.authService.register(registerUserDto);
   }
 
-  @Public() // ✅ Ruta pública: no requiere token para loguearse
+  @Public()
   @Post('login')
   async login(@Body() dto: LoginDTO) {
     return this.authService.login(dto);
   }
 
-  // Este sí puede requerir token si querés, así que lo dejamos sin @Public()
   @Post('refresh')
   async refresh(@Body('refresh_token') token: string) {
     return this.authService.refresh(token);
