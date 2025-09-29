@@ -1,0 +1,107 @@
+/* En: src/app/pages/editar-restaurante/editar-restaurante.component.css (VERSIÓN FINAL COMPLETA) */
+
+/* Contenedor principal que centra el formulario. */
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinea arriba para que se vea bien si hay errores */
+  padding: 3rem 1rem;
+  background-color: #fdfaf6;
+  min-height: calc(100vh - 60px);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* El "lienzo" blanco del formulario. */
+.form-container {
+  background-color: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 800px; /* Ancho máximo del formulario */
+  text-align: center;
+}
+
+/* Título principal del formulario. */
+.form-container h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+/* La grilla que organiza los campos. */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Crea dos columnas de igual tamaño. */
+  gap: 1.5rem; /* Espacio horizontal y vertical entre los campos. */
+  text-align: left;
+}
+
+/* Contenedor para cada par de etiqueta y campo de entrada. */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo de las etiquetas. */
+.form-group label {
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+/* Estilo de los campos de entrada de texto. */
+.form-group input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 12px; /* Esquinas redondeadas. */
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* Efecto visual cuando un campo está seleccionado (en foco). */
+.form-group input:focus {
+  outline: none;
+  border-color: #C1A7E2; /* Borde lila. */
+  box-shadow: 0 0 0 3px rgba(193, 167, 226, 0.3); /* Resplandor lila. */
+}
+
+/* Contenedor para el botón de guardar. */
+.footer-actions {
+  margin-top: 2.5rem;
+}
+
+/* Estilo del botón de guardar. */
+.save-button {
+  background-color: #C1A7E2;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 0.8rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Efecto hover para el botón. */
+.save-button:hover:not(:disabled) {
+  filter: brightness(0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo del botón cuando está deshabilitado. */
+.save-button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+/* Estilos para pantallas pequeñas (móviles). */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr; /* En móviles, los campos se apilan en una sola columna. */
+  }
+}

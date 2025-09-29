@@ -1,0 +1,49 @@
+<!-- En: src/app/pages/gestionar-menu/gestionar-menu.component.html (VERSIÓN CORREGIDA) -->
+
+<div class="page-container">
+  
+  <!-- Encabezado y botón para añadir nuevas categorías -->
+  <div class="header-controls">
+    <h2>Gestionar Menú</h2>
+    <button type="button" class="add-menu-button" (click)="addCategory()">
+      + Añadir Nuevo Menú
+    </button>
+  </div>
+
+  <!-- El formulario siempre es visible, pero solo muestra contenido si hay categorías -->
+  <form [formGroup]="menuForm" (ngSubmit)="onSubmit()">
+    
+    <div formArrayName="categories">
+      @for (category of categories.controls; track category; let categoryIndex = $index) {
+        <div class="category-block" [formGroupName]="categoryIndex">
+          
+          <div class="category-header">
+            <input type="text" formControlName="name" placeholder="Nombre del Menú (ej. Cafetería)">
+            <button type="button" class="remove-button" (click)="removeCategory(categoryIndex)">Eliminar Menú</button>
+          </div>
+
+          <div class="products-grid" formArrayName="products">
+            @for (product of products(categoryIndex).controls; track product; let productIndex = $index) {
+              <div class="product-card" [formGroupName]="productIndex">
+                <input type="text" formControlName="name" placeholder="Opción (ej. Espresso)">
+                <textarea formControlName="description" placeholder="Descripción"></textarea>
+                <input type="number" formControlName="price" placeholder="Precio">
+                <button type="button" class="remove-button-small" (click)="removeProduct(categoryIndex, productIndex)">Quitar</button>
+              </div>
+            }
+          </div>
+
+          <button type="button" class="add-item-button" (click)="addProduct(categoryIndex)">+ Añadir Opción</button>
+        </div>
+      }
+    </div>
+
+    <!-- El botón de guardar solo aparece si hay al menos una categoría en el formulario -->
+    @if (categories.controls.length > 0) {
+      <div class="footer-actions">
+        <button type="submit" class="save-button" [disabled]="menuForm.invalid">Guardar Cambios</button>
+      </div>
+    }
+
+  </form>
+</div>

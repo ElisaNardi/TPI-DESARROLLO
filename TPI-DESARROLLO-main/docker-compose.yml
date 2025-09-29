@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres        # Usuario por defecto
+      POSTGRES_PASSWORD: mipassword # Contraseña que usaste en tu app NestJS
+      POSTGRES_DB: tpi               # Nombre de tu base de datos
+    ports:
+      - "5433:5432"                  # Expone el puerto 5433 en tu máquina (puede cambiar si ya lo usás)
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres

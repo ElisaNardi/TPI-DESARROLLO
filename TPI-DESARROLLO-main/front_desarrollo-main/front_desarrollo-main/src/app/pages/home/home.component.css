@@ -1,0 +1,126 @@
+/* src/styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Contenedor principal que ocupa toda la pantalla y organiza las dos columnas */
+.home-container {
+  display: flex; /* ¡La magia de Flexbox empieza aquí! */
+  align-items: center; /* Centra verticalmente el contenido de las columnas */
+  justify-content: center; /* Centra horizontalmente */
+  height: 100vh; /* Ocupa al menos el 100% de la altura de la ventana */
+  background-color: #fdfaf6; /* Un color de fondo crema/blanco roto, similar al tuyo */
+  font-family: 'Poppins', sans-serif; /* Una fuente moderna y redondeada. Asegúrate de importarla */
+  padding: 0; /* Espaciado interno para que no se pegue a los bordes en pantallas pequeñas */
+  box-sizing: border-box; /* Asegura que el padding no aumente el tamaño total */
+}
+
+/* Columna de la izquierda con la información */
+.info-section {
+  flex: 1; /* Permite que esta columna crezca y ocupe el espacio disponible */
+  padding-right: 4rem; /* Espacio para separar el texto de las imágenes */
+  max-width: 500px; /* Un ancho máximo para que el texto no se estire demasiado */
+  text-align: left; /* Alinea el texto a la izquierda */
+}
+
+/* Estilo para el título "LILAS" */
+.info-section h1 {
+  font-size: 6rem; /* Tamaño de fuente grande */
+  font-weight: 700; /* Letra en negrita */
+  color: #C8A2C8; /* Un color lila/morado suave */
+  margin: 0 0 1rem 0; /* Espaciado: 0 arriba, 0 derecha, 1rem abajo, 0 izquierda */
+  line-height: 1; /* Ajusta la altura de la línea para que no sea muy grande */
+  letter-spacing: 0.1em; /* Un poco de espacio entre las letras */
+}
+
+/* Estilo para el párrafo de descripción */
+.info-section p {
+  font-size: 1.2rem; /* Tamaño de fuente para el párrafo */
+  color: #5d5d5d; /* Un color gris oscuro para el texto */
+  margin-bottom: 2.5rem; /* Espacio debajo del párrafo antes del botón */
+  line-height: 1.6;
+}
+
+/* Estilo para el botón "Iniciar sesión" */
+.login-button {
+  background-color: #C1A7E2; /* Color de fondo lila sólido */
+  color: white; /* Color del texto blanco */
+  border: 2px solid #502D73; /* Borde morado oscuro, da ese contorno definido */
+  padding: 1rem 2.5rem; /* Espaciado interno (vertical y horizontal) */
+  font-size: 1.5rem; /* tamaño de la letra */
+  font-weight: 600;
+  border-radius: 50px; /* Bordes completamente redondeados para hacerlo un píldora */
+  cursor: pointer; /* Cambia el cursor a una manito al pasar por encima */
+  transition: all 0.3s ease; /* Transición suave para los efectos */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra inicial sutil */
+}
+
+/* Efecto al pasar el mouse por encima del botón (hover) */
+.login-button:hover {
+  background-color: #C8A2C8; /* Cambia el fondo a lila */
+  color: white; /* Cambia el texto a blanco */
+  transform: translateY(-3px); /* Lo levanta un poquito */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade una sombra sutil */
+}
+
+/* Columna de la derecha con la galería de imágenes */
+.image-gallery {
+  display: grid; /* Usamos Grid Layout para organizar las imágenes fácilmente */
+  grid-template-columns: repeat(2, 1fr); /* Crea 2 columnas de igual tamaño */
+  grid-template-rows: repeat(2, 1fr); /* Crea 2 filas de igual tamaño */
+  gap: 1rem; /* Espacio de 1rem entre las imágenes */
+  width: 100%; /* Ajustamos el ancho para que sea flexible */
+  max-width: 550px; /* Límite de ancho para la galería */
+
+  /* CAMBIO CLAVE: La altura ya no es relativa a la ventana (vh), sino que la calculamos */
+  /* Esto hará que mantenga una proporción cuadrada-ish */
+  aspect-ratio: 1 / 1; 
+}
+
+/* Estilo general para todas las imágenes dentro de la galería */
+.image-gallery img {
+  width: 100%; /* La imagen ocupa el 100% del ancho de su celda en el grid */
+  height: 100%; /* La imagen ocupa el 100% de la altura de su celda */
+  object-fit: cover; /* Evita que la imagen se deforme, la recorta para que encaje */
+  border-radius: 20px; /* Bordes redondeados */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); /* Sombra sutil */
+  transition: transform 0.3s ease;
+}
+
+.image-gallery img:hover {
+    transform: scale(1.05); /* Agranda un poco la imagen al pasar el mouse */
+}
+
+/* Este contenedor organiza Y da un poco de espacio si es necesario */
+.content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem; /* Aumenté un poco el espacio para que se vea más separado */
+  width: 95%; /* Ocupa casi todo el ancho, pero deja un margen */
+  max-width: 1300px; /* Límite para pantallas muy grandes */
+}
+
+/* Responsive: Ajustes para pantallas más pequeñas (móviles) */
+@media (max-width: 768px) {
+  .home-container {
+    flex-direction: column; /* Apila las columnas una encima de la otra */
+    text-align: center; /* Centra el texto */
+    padding: 2rem 1rem;
+  }
+
+  .info-section {
+    padding-right: 0; /* Ya no necesitamos esto, usamos gap */
+    max-width: 500px;
+    text-align: left;
+  }
+  
+  .image-gallery {
+    /* flex: 1; <-- Puedes quitar o comentar esta línea */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 600px;
+    height: 80vh;
+    max-height: 700px;
+  }
+}

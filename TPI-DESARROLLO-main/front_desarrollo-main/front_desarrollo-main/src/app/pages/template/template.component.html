@@ -1,0 +1,61 @@
+<!-- En: src/app/pages/template/template.component.html (VERSIÓN FINAL CORREGIDA) -->
+
+<!-- NAVBAR SUPERIOR -->
+<nav class="navbar navbar-expand-lg bg-purple text-white">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+   <!--
+      El botón de menú hamburguesa SOLO se renderiza si el usuario es admin.
+      Si un usuario normal entra, este botón ni siquiera existirá en el HTML.
+    -->
+    @if (authService.isAdmin()) {
+      <button class="btn text-white" (click)="toggleMenu()">
+        <i class="bi bi-list fs-3"></i>
+      </button>
+    } @else {
+      <!--  Dejamos un espacio vacío para que el título se mantenga centrado. -->
+      <div style="width: 40px;"></div>
+    }
+
+    <!-- Título central dinámico (sin cambios) -->
+    <h1 class="navbar-title m-0">
+      {{ pageTitle$ | async }}
+    </h1>
+
+    <!-- Botón del carrito de compras (sin cambios) -->
+    <button class="btn text-white">
+      <i class="bi bi-cart fs-3"></i>
+    </button>
+
+  </div>
+</nav>
+
+<!-- MENÚ LATERAL -->
+<!-- 
+  Este @if es una doble seguridad. Aunque el botón para abrirlo ya está oculto
+  para los no-admins, esto asegura que el panel NUNCA se renderice si el usuario
+  no tiene el rol correcto.
+-->
+@if (menuAbierto && authService.isAdmin()) {
+  <div class="position-fixed top-0 start-0 h-100 bg-light shadow-sm p-3" style="width: 240px; z-index: 1050;">
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h6 class="text-uppercase fw-bold m-0">Menu</h6>
+      <button class="btn btn-sm" (click)="toggleMenu()"><i class="bi bi-x-lg"></i></button>
+    </div>
+
+    <ul class="nav flex-column">
+        <!-- ÚNICA OPCIÓN : Añadir Restaurante. -->
+        <li class="nav-item mb-2">
+          <a routerLink="/agregar-restaurante" class="nav-link d-flex align-items-center text-dark" (click)="toggleMenu()">
+            <i class="bi bi-plus-lg me-2"></i>
+            Añadir Restaurante
+          </a>
+        </li>
+    </ul>
+  </div>
+}
+
+<!-- CONTENIDO PRINCIPAL  -->
+<div [class.ms-240]="menuAbierto && authService.isAdmin()" class="transition-all">
+  <router-outlet></router-outlet>
+</div>
