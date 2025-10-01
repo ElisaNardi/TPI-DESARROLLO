@@ -76,3 +76,10 @@ Si `ng serve` da error de CLI, instalala globalmente:
 **localhost:4200** → es el frontend, o sea Angular.
 
 **localhost:4001** → es el backend, o sea NestJS (API).
+
+------------------------------------------------------
+
+Ejectuar spects:
+user.service.spects.ts: npx jest --verbose --runInBand src/users/users.service.spec.ts
+auth.service.spect.ts: npx jest --verbose --runInBand src/auth/auth.service.spec.ts
+menu.serve.spects.ts: npm test

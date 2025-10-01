@@ -5,9 +5,14 @@ import { UserEntity } from '../entities/user.entity';
 import { RoleEntity } from '../entities/role.entity';
 import { AssignRoleDTO } from '../interfaces/assign-role.dto';
 
-
 @Injectable()
 export class UserService {
+  async findById(id: number): Promise<UserEntity | null> {
+    return this.userRepo.findOne({
+      where: { id },
+      relations: ['roles'],
+    });
+  }
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepo: Repository<UserEntity>,
@@ -15,13 +20,6 @@ export class UserService {
     @InjectRepository(RoleEntity)
     private readonly roleRepo: Repository<RoleEntity>,
   ) {}
-
-  async findById(id: number): Promise<UserEntity | null> {
-    return this.userRepo.findOne({
-      where: { id },
-      relations: ['roles'], // si querés traer roles junto con el usuario
-    });
-  }
 
   // Buscar usuario por email (para login o guards)
   async findByEmail(email: string): Promise<UserEntity | null> {
@@ -50,5 +48,13 @@ export class UserService {
 
     user.roles = [...(user.roles || []), role];
     return this.userRepo.save(user);
+  }
+
+  // Buscar un usuario por ID (esto es para la pueba de NestJS, solo es un metodo)
+  async findOne(id: number): Promise<UserEntity | undefined> {
+    return this.userRepo.findOne({
+      where: { id },
+      relations: ['roles'],
+    });
   }
 }

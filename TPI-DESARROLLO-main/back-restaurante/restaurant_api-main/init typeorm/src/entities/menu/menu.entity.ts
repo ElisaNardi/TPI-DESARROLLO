@@ -17,7 +17,7 @@ export class Menu {
   @Column({ type: 'text', nullable: true })
   description: string | null;
 
-  // Tu BD hoy tiene double precision; mantenelo para no pelear con migraciones.
+  //BD tiene double precision
   @Column({ type: 'double precision', default: 0 })
   price: number;
 
@@ -27,7 +27,7 @@ export class Menu {
   @Column({ default: 'General' })
   category: string;
 
-  // Columna FK explícita (nos deja usar where por ID sin cargar la relación)
+  //FK explícita (nos deja usar where por ID sin cargar la relación)
   @Column()
   restaurantId: number;
 

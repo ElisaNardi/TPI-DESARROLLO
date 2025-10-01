@@ -37,14 +37,14 @@ export class MenuService {
 
     if (!menuItems?.length) return []; // si viene vacío, queda sin menú
 
-    // 3) De-dupe en memoria por nombre
+    // 3) Quitar datos duplicado en memoria por nombre
     const byName = new Map<string, CreateMenuItemDto>();
     for (const it of menuItems) {
       const key = it.name.trim();
       if (!byName.has(key)) byName.set(key, it);
     }
 
-    // 4) Creo y guardo entidades
+    // 4) Crear entidades nuevas con los datos ya filtrados
     const entities = [...byName.values()].map((dto) =>
       em.create(Menu, {
         name: dto.name.trim(),
@@ -54,8 +54,8 @@ export class MenuService {
         restaurantId,
       }),
     );
-
     try {
+      // Guardar todo junto en la BD
       return await em.save(Menu, entities);
     } catch (e: any) {
       // 23505: unique_violation en Postgres
