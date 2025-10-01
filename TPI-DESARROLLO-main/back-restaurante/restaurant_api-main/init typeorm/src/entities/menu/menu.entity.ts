@@ -1,9 +1,12 @@
 // src/entities/menu/menu.entity.ts
-
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+// src/entities/menu/menu.entity.ts
+import {
+  Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Unique, Index} from 'typeorm';
 import { Restaurant } from '../restaurant/restaurant.entity';
 
-@Entity()
+@Unique(['restaurantId', 'name'])          // <- evita duplicados en BD
+@Index(['restaurantId', 'name'])           // <- ayuda a las búsquedas
+@Entity({ name: 'menu' })
 export class Menu {
   @PrimaryGeneratedColumn()
   id: number;
@@ -11,26 +14,26 @@ export class Menu {
   @Column()
   name: string;
 
-  // Hacemos la descripción 'nullable' para que pueda ser opcional,
-  // o le damos un valor por defecto si siempre debe ser un string.
-  // Opción A (Recomendada): Permitir que sea nulo en la DB.
   @Column({ type: 'text', nullable: true })
-  description: string;
-  
-  // Opción B: No permitir nulos.
-  // @Column()
-  // description: string;
+  description: string | null;
 
-  @Column('decimal')
+  // Tu BD hoy tiene double precision; mantenelo para no pelear con migraciones.
+  @Column({ type: 'double precision', default: 0 })
   price: number;
 
-  // Añadimos la columna para guardar el nombre de la categoría (ej. "Cafetería").
-  // Podemos darle un valor por defecto si queremos.
+  @Column({ nullable: true })
+  imageUrl?: string;
+
   @Column({ default: 'General' })
   category: string;
 
-   // Un ítem del menú pertenece a UN restaurante.
-  @ManyToOne(() => Restaurant, restaurant => restaurant.menuItems)
+  // Columna FK explícita (nos deja usar where por ID sin cargar la relación)
+  @Column()
+  restaurantId: number;
+
+  @ManyToOne(() => Restaurant, (restaurant) => restaurant.menuItems, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'restaurantId' })
   restaurant: Restaurant;
 }
-//Importante: Al modificar la entidad, si estás en un entorno de desarrollo con `synchronize: true` en tu `app.module.ts`, TypeORM debería intentar actualizar la tabla automáticamente. Si no, puede que necesites reiniciar la aplicación o manejar una migración
