@@ -1,10 +1,10 @@
 // src/auth/auth.service.spec.ts
 import { ConflictException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { AuthService } from './auth.service';
-import { UserEntity } from '../entities/user.entity';
-import { RoleEntity } from '../entities/role.entity';
-import { JwtService } from '../jwt/jwt.service';
+import { AuthService } from '../src/auth/auth.service';
+import { UserEntity } from '../src/entities/user.entity';
+import { RoleEntity } from '../src/entities/role.entity';
+import { JwtService } from '../src/jwt/jwt.service';
 
 import * as bcrypt from 'bcrypt';
 

@@ -1,9 +1,9 @@
 // src/menu/menu.service.spec.ts
 import { ConflictException, NotFoundException } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
-import { Menu } from '../entities/menu/menu.entity';
-import { Restaurant } from '../entities/restaurant/restaurant.entity';
-import { MenuService } from './menu.service';
+import { Menu } from '../src/entities/menu/menu.entity';
+import { Restaurant } from '../src/entities/restaurant/restaurant.entity';
+import { MenuService } from '../src/menu/menu.service';
 
 
 // —— Helpers de mock mínimos para repos TypeORM —— //
