@@ -1,4 +1,3 @@
-// src/auth/auth.service.spec.ts
 import { ConflictException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { AuthService } from '../src/auth/auth.service';
