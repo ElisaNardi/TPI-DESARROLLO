@@ -83,3 +83,4 @@ Ejectuar spects:
 user.service.spects.ts: npx jest --verbose --runInBand src/users/users.service.spec.ts
 auth.service.spect.ts: npx jest --verbose --runInBand src/auth/auth.service.spec.ts
 menu.serve.spects.ts: npm test
+auth.register.int-spect.ts: npm run test:int
