@@ -80,7 +80,13 @@ Si `ng serve` da error de CLI, instalala globalmente:
 ------------------------------------------------------
 
 Ejectuar spects:
+Unitarias:
 user.service.spects.ts: npx jest --verbose --runInBand src/users/users.service.spec.ts
 auth.service.spect.ts: npx jest --verbose --runInBand src/auth/auth.service.spec.ts
 menu.serve.spects.ts: npm test
+
+Integracion: 
 auth.register.int-spect.ts: npm run test:int
+
+E2E:
+npm run test:e2e

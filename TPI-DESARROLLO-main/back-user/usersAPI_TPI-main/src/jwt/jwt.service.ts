@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import jwt, { SignOptions, Secret, JwtPayload } from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';  
+import type { SignOptions, Secret, JwtPayload } from 'jsonwebtoken';
 import * as dayjs from 'dayjs';
 
 interface Payload {

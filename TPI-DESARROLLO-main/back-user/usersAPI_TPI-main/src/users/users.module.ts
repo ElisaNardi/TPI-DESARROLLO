@@ -4,7 +4,7 @@ import { UserEntity } from '../entities/user.entity'; // Entidad de usuarios
 import { RoleEntity } from '../entities/role.entity'; // Entidad de roles
 import { UserService } from './users.service'; // Lógica de negocio del usuario
 import { UserController } from './users.controller'; // Endpoints del usuario
-import { RoleModule } from 'src/roles/roles.module'; // Para poder usar funcionalidades de roles
+import { RoleModule } from '../roles/roles.module'; // Para poder usar funcionalidades de roles
 import { JwtModule } from '../jwt/jwt.module'; // ✅ IMPORTANTE: para que funcione PermissionsGuard
 
 @Module({
