@@ -1,4 +1,13 @@
 // --- 1. IMPORTACIONES  ---
+// Component: para crear el componente de Angular.
+// OnInit / OnDestroy: interfaces para ejecutar lógica al iniciar y al destruir el componente.
+// CommonModule: módulo básico de Angular (ngIf, ngFor, etc.).
+// ReactiveFormsModule: para trabajar con formularios reactivos (FormGroup, FormControl, etc.).
+// FormBuilder, FormGroup, Validators: utilidades para armar y validar formularios.
+// ActivatedRoute: nos permite leer parámetros de la URL (por ejemplo, el id del restaurante).
+// Router: para navegar entre rutas de la aplicación.
+// ApiService: servicio propio que encapsula las llamadas HTTP al backend.
+// GlobalStatusService: servicio propio para manejar título de página y estado de carga global.
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -20,20 +29,32 @@ export class EditarRestauranteComponent implements OnInit, OnDestroy {
   restaurantForm!: FormGroup;
   isLoading = true; 
 
-  // --- 3. CONSTRUCTOR  ---
+ // --- 3. CONSTRUCTOR ---
+  // Inyectamos todos los servicios que el componente necesita.
   constructor(
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private apiService: ApiService,
-    private globalStatusService: GlobalStatusService
+    private fb: FormBuilder,  // Para construir el formulario reactivo.
+    private route: ActivatedRoute,// Para leer parámetros de la ruta (por ejemplo, /editar-restaurante/:id).
+    private router: Router,// Para redirigir a otras rutas luego de guardar.
+    private apiService: ApiService, // Servicio que hace las llamadas HTTP al backend.
+    private globalStatusService: GlobalStatusService // Servicio que maneja título y estado global de carga.
   ) {
     this.restaurantForm = this.fb.group({
-      name: ['', Validators.required], description: [''],
-      city: ['', Validators.required], street: ['', Validators.required],
-      number: ['', Validators.required], imageUrl: ['', Validators.required]
+      name: ['', Validators.required],
+      description: [
+        '',
+        [
+          Validators.required, //  no puede estar vacío
+          Validators.maxLength(200),  //  evita textos excesivamente largos.
+          Validators.pattern(/^[^<>]*$/) //  expresión regular que SOLO permite caracteres
+        ]
+      ],
+      city: ['', Validators.required],
+      street: ['', Validators.required],
+      number: ['', Validators.required],
+      imageUrl: ['', Validators.required]
     });
   }
+
 
   // --- 4. ngOnInit  ---
   // ngOnInit  solo obtiene el ID y llama a la función de carga.
